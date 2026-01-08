@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
 from flask import session, redirect, url_for
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 app = Flask(__name__)
 
@@ -7,7 +9,7 @@ app.secret_key = 'secret123'
 
 USER = {
     'username': 'admin',
-    'password': '1234'
+    'password': generate_password_hash('1234')
 }
 
 @app.route('/')
@@ -19,15 +21,17 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-    
-        if username == USER['username'] and password == USER['password']:
+
+        if (
+            username == USER['username'] and 
+            check_password_hash(USER['password'], password)
+        ):
             session['user'] = username
             return redirect(url_for('dashboard'))
             #return "Login successful!"
         else:
             return "Invalid credentials, please try again."
-        # Add your login logic here
-        #return f"username: {username}, password: {password}"
+        
     return render_template('login.html')  # Ensure you have a login.html template in the templates folder
 
 @app.route('/dashboard')
