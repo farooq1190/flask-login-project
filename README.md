@@ -7,8 +7,8 @@ A beginner-friendly Flask login system with:
 - Logout
 
 ## Login
-Credentials are hardcoded in `app.py` for demo purposes.
-You can modify them in the USER dictionary.
+User = admin
+Password= 1234
 
 
 ## How to Run
