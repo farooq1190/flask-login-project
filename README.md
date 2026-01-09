@@ -5,6 +5,7 @@ A beginner-friendly Flask login system with:
 - Sessions
 - Protected dashboard
 - Logout
+- Database SQLite
 
 ## Login
 User = admin
